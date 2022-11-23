@@ -11,7 +11,12 @@ const PORT = 3000
 
 const pokemon = require("./models/pokemon")
 
+app.use((req, res, next) => {
+  console.log("Middleware");
+  next();
+});
 
+app.use(express.urlencoded({extended:false}))
 
 
 app.set("view engine", "jsx")
@@ -25,6 +30,15 @@ app.get("/", (req, res) => {
 app.get("/pokemon", (req, res) => {
   res.render("Index", { pokemon: pokemon })
 })
+
+app.get("/pokemon/new", (req, res) => {
+  res.render("New");
+});
+
+app.post("/pokemon", (req, res) => {
+  pokemon.push(req.body);
+  res.redirect("/pokemon");
+});
 
 app.get("/pokemon/:id", (req, res) => {
   res.render("Show", pokemon[req.params.id]);
