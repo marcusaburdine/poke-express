@@ -5,7 +5,7 @@ class Index extends React.Component {
 
         return (
             <div>
-                <h1>Pokemon Index Page</h1>
+                <h1>Pokedex </h1>
                 {
                     pokemon.map((pokemon, i) => {
                         let pokeName = pokemon.name
